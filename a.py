@@ -38,10 +38,16 @@ while(start_pos < len(all_trans)):
         i = i+1
         if (i>=len(all_trans)):
             break
+    txt = txt.strip()
     pyperclip.copy(txt)
-    print('{} copyed, goto translate it, {}/{}'.format(txt.strip(), i, len(all_trans)))
+    print('{} copyed'.format(txt))
+
+    while pyperclip.paste()==txt or len(pyperclip.paste().split('\n')) != i-start_pos :
+        pyperclip.copy(txt)
+        print('goto translate it, {}/{}'.format(i, len(all_trans)))
+        input()
     txt = ''
-    input()
+
     chinese_trans = pyperclip.paste().split('\n')
     print('{} getted, fill it'.format(chinese_trans))
     input()
