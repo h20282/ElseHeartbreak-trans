@@ -7,12 +7,6 @@ import pyperclip
 
 all_files = glob.glob("English/*.mtf")
 
-
-pyperclip.copy('The text to be copied to the clipboard.')
-pyperclip.paste()   # 'The text to be copied to the clipboard.'
-print(f"我是复制的内容：{pyperclip.paste()}")
-
-
 all_trans = []
 
 for per_file in all_files:
@@ -30,23 +24,22 @@ for per_file in all_files:
 print(all_trans)
 
 start_pos = 0
-txt = ''
 while(start_pos < len(all_trans)):
     i = start_pos
+    txt = ''
     while len(txt) < 4900:
         txt = txt + all_trans[i]['swedish'] + '\n'
         i = i+1
         if (i>=len(all_trans)):
             break
     txt = txt.strip()
-    pyperclip.copy(txt)
-    print('{} copyed'.format(txt))
+    print('{}'.format(txt))
 
+    pyperclip.copy(txt)
     while pyperclip.paste()==txt or len(pyperclip.paste().split('\n')) != i-start_pos :
         pyperclip.copy(txt)
-        print('goto translate it, {}/{}'.format(i, len(all_trans)))
+        print('copyed, goto translate it, {}/{}'.format(i, len(all_trans)))
         input()
-    txt = ''
 
     chinese_trans = pyperclip.paste().split('\n')
     print('{} getted, fill it'.format(chinese_trans))
